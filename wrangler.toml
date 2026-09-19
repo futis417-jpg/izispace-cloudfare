@@ -1,0 +1,14 @@
+name = "izispace-ocean"
+main = "worker.js"
+compatibility_date = "2026-09-19"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+# Crea el namespace con: npx wrangler kv namespace create ANNOUNCEMENTS
+# y reemplaza el ID de abajo por el que te devuelva Cloudflare.
+[[kv_namespaces]]
+binding = "ANNOUNCEMENTS"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
