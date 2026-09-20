@@ -1998,7 +1998,7 @@
       const typingDiv = document.createElement('div');
       typingDiv.id = 'typing-indicator';
       typingDiv.className = 'flex gap-3 items-center text-xs text-slate-400 italic';
-      typingDiv.innerHTML = `<div class="w-2 h-2 rounded-full bg-cyan-400 animate-bounce"></div> Pensando con Gemini 3 Flash...`;
+      typingDiv.innerHTML = `<div class="w-2 h-2 rounded-full bg-cyan-400 animate-bounce"></div> Pensando...`;
       container.appendChild(typingDiv);
       container.scrollTop = container.scrollHeight;
 
@@ -2017,33 +2017,20 @@
       let responseText = "";
 
       try {
-        const apiKey = "";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-        const payload = {
-          contents: [{ parts: [{ text: prompt }] }],
-          systemInstruction: { parts: [{ text: systemPrompt }] }
-        };
-
-        const response = await fetch(apiUrl, {
+        const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ message: prompt, system: systemPrompt })
         });
 
         const data = await response.json();
-        if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-          responseText = data.candidates[0].content.parts[0].text;
+        if (data.response) {
+          responseText = data.response;
         } else {
-          throw new Error("No response from Gemini");
+          throw new Error("No response from Worker");
         }
       } catch (err) {
-        try {
-          const fallbackRes = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt + " (Responde en español de forma concisa)")}`);
-          responseText = await fallbackRes.text();
-        } catch (e2) {
-          responseText = "Lo siento, ha habido un problema temporal de conexión con el motor de IA. Inténtalo de nuevo en unos segundos.";
-        }
+        responseText = "Lo siento, ha habido un problema temporal de conexión con el motor de IA. Inténtalo de nuevo en unos segundos.";
       }
 
       const indicator = document.getElementById('typing-indicator');
