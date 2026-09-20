@@ -12,3 +12,6 @@ run_worker_first = ["/api/*"]
 [[kv_namespaces]]
 binding = "ANNOUNCEMENTS"
 id = "cdff7e50fe36459cb936c954a7f54dcd"
+
+[ai]
+binding = "AI"
