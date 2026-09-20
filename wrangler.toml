@@ -11,4 +11,4 @@ run_worker_first = ["/api/*"]
 # y reemplaza el ID de abajo por el que te devuelva Cloudflare.
 [[kv_namespaces]]
 binding = "ANNOUNCEMENTS"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+id = "cdff7e50fe36459cb936c954a7f54dcd"
