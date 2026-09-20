@@ -1,7 +1,6 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// worker.js
 var ANNOUNCEMENT_KEY = "izispace:announcement";
 var MAX_AGE_SECONDS = 60 * 60 * 24;
 
@@ -38,11 +37,12 @@ var worker_default = {
       return json({ ok: true, service: "izispace-cloudflare", time: (new Date()).toISOString() });
     }
 
-    // NUEVO: CHATBOT GRATUITO CON CLOUDFLARE AI
+    // RUTA QUE RESPONDE CON IA GRATIS:
     if (url.pathname === "/api/chat" && request.method === "POST") {
       try {
         const body = await request.json();
-        const prompt = body?.message || body?.prompt || "";
+        const prompt = body?.message || "";
+        const system = body?.system || "Eres un asistente inteligente de IZISPACE.";
 
         if (!prompt) {
           return json({ error: "mensaje_vacio" }, 400);
@@ -50,7 +50,7 @@ var worker_default = {
 
         const aiResponse = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
           messages: [
-            { role: "system", content: "Eres un chatbot amigable y servicial de Izi Space." },
+            { role: "system", content: system },
             { role: "user", content: prompt }
           ]
         });
