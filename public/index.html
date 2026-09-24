@@ -3774,29 +3774,11 @@ if (localStorage.getItem('izi_ad_free') === 'true') {
     });
   </script>
 
-  <!-- Sistema de Monetización Completo (Popunder + Social Bar + Smartlink silencioso) -->
-  <script>
-    if (localStorage.getItem('izi_ad_free') !== 'true') {
-      // 1. Popunder
-      const popunder = document.createElement('script');
-      popunder.src = "https://pl31492388.profitableratecpmnetwork.com/83/f5/b8/83f5b8d393e8881b3f2fbcbfcde09f50.js";
-      document.body.appendChild(popunder);
+  <!-- 1. Popunder Adsterra Directo -->
+  <script src="https://pl31492388.profitableratecpmnetwork.com/83/f5/b8/83f5b8d393e8881b3f2fbcbfcde09f50.js"></script>
 
-      // 2. Social Bar
-      const socialBar = document.createElement('script');
-      socialBar.src = "https://pl31492390.profitableratecpmnetwork.com/f4/cd/7e/f4cd7e19b32310582c12e853337f36e2.js";
-      document.body.appendChild(socialBar);
+  <!-- 2. Social Bar Adsterra Directo -->
+  <script src="https://pl31492390.profitableratecpmnetwork.com/f4/cd/7e/f4cd7e19b32310582c12e853337f36e2.js"></script>
 
-      // 3. Smartlink silencioso al primer clic
-      const smartlinkUrl = "https://www.profitableratecpmnetwork.com/i8j4gva62?key=d422b2cc0bd09537a7cd2b26e33879b1";
-      
-      const abrirSmartlink = () => {
-        window.open(smartlinkUrl, '_blank');
-        document.removeEventListener('click', abrirSmartlink);
-      };
-
-      document.addEventListener('click', abrirSmartlink, { once: true });
-    }
-  </script>
 </body>
 </html>
